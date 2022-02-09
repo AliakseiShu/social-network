@@ -4,14 +4,14 @@ import { MyPosts } from "./MyPosts/MyPosts";
 
 export const Profile = () => {
   return (
-    <div className={s.content}>
+    <div>
       <div>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRyfxsDdRmIrdONoTLssEJouxfGBr_q9NMyg&usqp=CAU'/>
+        <img src='https://ak.picdn.net/shutterstock/videos/18062566/thumb/1.jpg'/>
       </div>
       <div>
         ava + decription
       </div>
-      <MyPosts/>
+      <MyPosts />
     </div>
   )
 }
