@@ -9,7 +9,7 @@ export const Profile = () => {
         <img src='https://ak.picdn.net/shutterstock/videos/18062566/thumb/1.jpg'/>
       </div>
       <div>
-        ava + decription
+        ava + description
       </div>
       <MyPosts />
     </div>
