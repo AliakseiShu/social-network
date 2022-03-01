@@ -1,17 +1,19 @@
 import React from 'react';
 import s from './Profile.module.css';
-import { MyPosts } from "./MyPosts/MyPosts";
+import { MyPosts, MyPostsArrayProps } from "./MyPosts/MyPosts";
+import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
-export const Profile = () => {
+
+type PropsType={
+  posts:MyPostsArrayProps[]
+}
+
+
+export const Profile = (props:PropsType) => {
   return (
     <div>
-      <div>
-        <img src='https://ak.picdn.net/shutterstock/videos/18062566/thumb/1.jpg'/>
-      </div>
-      <div>
-        ava + description
-      </div>
-      <MyPosts />
+      <ProfileInfo/>
+      <MyPosts posts={props.posts}/>
     </div>
   )
 }
