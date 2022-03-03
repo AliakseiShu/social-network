@@ -1,7 +1,9 @@
+import { rerenderEntireTree } from "../render";
+
 export type StateType = {
   profilePage: ProfilePageType
   dialogsPage: DialogsPageType
-}
+ }
 
 export type DialogItemType = {
   id: number
@@ -50,19 +52,14 @@ export let state: StateType = {
   }
   //sidebar: {}
 }
-/*export type addPostType = {
-  id: number
-  message: string
-  likesCount: number
-}*/
 
 export let addPost = (newPostText: string)=>{
-  let newPost={
+    let newPost={
     id:5,
     message: newPostText,
     likesCount:0
   }
-  state.profilePage.posts.push(newPost)
+  state.profilePage.posts.push(newPost);
+  rerenderEntireTree(state)
 }
 
-console.log('state: ', state)

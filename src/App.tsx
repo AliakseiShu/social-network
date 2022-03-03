@@ -7,7 +7,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { News } from "./components/News/News";
 import { Music } from "./components/Music/Music";
 import { Settings } from "./components/Settings/Settings";
-
 import { StateType } from "./redux/state";
 import { Dialogs } from "./components/Dialogs/Dialogs";
 
@@ -24,7 +23,8 @@ const App = (props:PropsType) => {
         <Navbar/>
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}/>
+            <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage}
+                                                       addPost={props.addPost}/>}/>
             <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage}/>}/>
             <Route path='/news/*' element={<News/>}/>
             <Route path='/music/*' element={<Music/>}/>

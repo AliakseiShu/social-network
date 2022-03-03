@@ -16,14 +16,15 @@ export const MyPosts = (props: PropsType) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null);
 
   let addPost = () => {
-      if(newPostElement.current) {
-        props.addPost(newPostElement.current.value)
-      } else {
-        alert('newPostElement is null')
-      }
+    if (newPostElement.current?.value) {
+      props.addPost(newPostElement.current.value)
+      newPostElement.current.value = ''
+    } else {
+      alert('newPostElement is null')
+    }
 
-      // let text = newPostElement.current;
-      // alert(text);
+    // let text = newPostElement.current;
+    // alert(text);
   }
 
   return (
