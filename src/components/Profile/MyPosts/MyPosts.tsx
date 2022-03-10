@@ -1,7 +1,8 @@
 import React, { ChangeEvent, ChangeEventHandler, useRef } from 'react';
 import s from './MyPosts.module.css';
 import { Post } from "./Post/Post";
-import { MyPostsArrayProps } from "../../../redux/state";
+import { ActionsTypes, MyPostsArrayProps } from "../../../redux/state";
+import { text } from "stream/consumers";
 
 
 type PropsType = {
@@ -9,6 +10,7 @@ type PropsType = {
   addPost: (newPostText: string) => void
   newPostText:string
   updateNewPostText:(newText: string)=>void
+  dispatch:(action: ActionsTypes) => void
 }
 
 export const MyPosts = (props: PropsType) => {
@@ -18,8 +20,8 @@ export const MyPosts = (props: PropsType) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null);
 
   let addPost = () => {
-    props.addPost(props.newPostText);
-    props.updateNewPostText('')
+    props.dispatch({type: 'ADD-POST', newPostText: props.newPostText});
+/*    props.dispatch('')*/
   /*  if (newPostElement.current?.value) {
       props.addPost(newPostElement.current.value)
       newPostElement.current.value = ''
@@ -29,8 +31,9 @@ export const MyPosts = (props: PropsType) => {
   }
 
   let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
-   props.updateNewPostText(e.currentTarget.value);
-  }
+    let action = {type:'UPDATE-NEW-POST-TEXT',newText:text};
+    props.dispatch(action)
+   }
 
   return (
     <div className={s.postsBlock}>
