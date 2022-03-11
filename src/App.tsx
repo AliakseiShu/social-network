@@ -7,18 +7,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { News } from "./components/News/News";
 import { Music } from "./components/Music/Music";
 import { Settings } from "./components/Settings/Settings";
-import { ActionsTypes, RootStateType, StoreType } from "./redux/state";
+import { ActionsTypes, RootStateType, store, StoreType } from "./redux/state";
 import { Dialogs } from "./components/Dialogs/Dialogs";
 
 type PropsType = {
   state: RootStateType
-  addPost: (newPostText: string) => void
-  updateNewPostText: (newText: string) => void
-  store:StoreType
-  dispatch:(action: ActionsTypes) => void
+  store: StoreType
+  dispatch: (action: ActionsTypes) => void
 }
 const App: React.FC<PropsType> = (props) => {
-/*const state = props.state.getState()*/
+  /*const state = props.state.getState()*/
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -28,9 +26,12 @@ const App: React.FC<PropsType> = (props) => {
           <Routes>
             <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage}
                                                        dispatch={props.store.dispatch.bind(props.store)}
-                                                      /* updateNewPostText={props.updateNewPostText}*/
+              /* updateNewPostText={props.updateNewPostText}*/
             />}/>
-            <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+            <Route path='/dialogs/*' element={<Dialogs
+              store={props.store}
+              dialogsPage={props.state.dialogsPage}
+            />}/>
             <Route path='/news/*' element={<News/>}/>
             <Route path='/music/*' element={<Music/>}/>
             <Route path='/settings/*' element={<Settings/>}/>
