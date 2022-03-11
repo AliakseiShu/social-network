@@ -51,8 +51,8 @@ type ChangeNewTextActionType = {
 }
 
 export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
-
-
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST = 'UPDATE-NEW-POST-TEXT';
 
 export const store: StoreType = {
   _state: {
@@ -115,4 +115,10 @@ export const store: StoreType = {
     }
   }
 }
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const addPostTextActionCreator = (text:string) =>
+  ({ type: UPDATE_NEW_POST,newText: text})
+
+
+
 

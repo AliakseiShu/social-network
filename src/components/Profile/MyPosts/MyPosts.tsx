@@ -1,17 +1,17 @@
-import React, { ChangeEvent, ChangeEventHandler, useRef } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 import s from './MyPosts.module.css';
 import { Post } from "./Post/Post";
-import { ActionsTypes, MyPostsArrayProps } from "../../../redux/state";
-import { text } from "stream/consumers";
+import { ActionsTypes, addPostActionCreator, addPostTextActionCreator, MyPostsArrayProps } from "../../../redux/state";
 
 
 type PropsType = {
   posts: MyPostsArrayProps[]
   addPost: (newPostText: string) => void
-  newPostText:string
-  updateNewPostText:(newText: string)=>void
-  dispatch:(action: ActionsTypes) => void
+  newPostText: string
+  updateNewPostText: (newText: string) => void
+  dispatch: (action: ActionsTypes) => void
 }
+
 
 export const MyPosts = (props: PropsType) => {
   let postsElements =
@@ -20,20 +20,20 @@ export const MyPosts = (props: PropsType) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null);
 
   let addPost = () => {
-    props.dispatch({type: 'ADD-POST', newPostText: props.newPostText});
-/*    props.dispatch('')*/
-  /*  if (newPostElement.current?.value) {
-      props.addPost(newPostElement.current.value)
-      newPostElement.current.value = ''
-    } else {
-      alert('newPostElement is null')
-    }*/
+    props.dispatch({addPostActionCreator})
+    /*    props.dispatch('')*/
+    /*  if (newPostElement.current?.value) {
+        props.addPost(newPostElement.current.value)
+        newPostElement.current.value = ''
+      } else {
+        alert('newPostElement is null')
+      }*/
   }
 
-  let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
-    let action = {type:'UPDATE-NEW-POST-TEXT',newText:text};
+  let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    let action = {addPostTextActionCreator};
     props.dispatch(action)
-   }
+  }
 
   return (
     <div className={s.postsBlock}>
