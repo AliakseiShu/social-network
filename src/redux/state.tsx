@@ -39,38 +39,30 @@ export type DialogsPageType = {
 
 export type StoreType = {
   _state: RootStateType
-  updateNewPostText: (newText: string) => void
-  addPost: (newPostText: string) => void
+  // updateNewPostText: (newText: string) => void
+  // addPost: (newPostText: string) => void
   _ocChange: () => void
   _subscribe: (callBack: () => void) => void
   getState: () => RootStateType
   dispatch: (action: ActionsTypes) => void
-}
+  }
 
-/*export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type ChangeNewTextActionType = ReturnType<typeof addPostTextActionCreator>
-export type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
-export type UpdateNewMessageBodyCreator = ReturnType<typeof updateNewMessageBodyCreator>*/
+// export type ActionsTypes =
+//   AddPostActionType
+//   | ChangeNewTextActionType
+//   | SendMessageCreatorType
+//   | UpdateNewMessageBodyCreator
 
+ export type ActionsTypes = any
 
-export type ActionsTypes =
-  AddPostActionType
-  | ChangeNewTextActionType
-  | SendMessageCreatorType
-  | UpdateNewMessageBodyCreator
-/*const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST = 'UPDATE_NEW_POST_TEXT';
-
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
-const SEND_MESSAGE = 'SEND_MESSAGE';*/
 export const store: StoreType = {
   _state: {
     profilePage: {
-      newPostText: "",
-      posts: [
+          posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 12},
         {id: 2, message: "It's my first post", likesCount: 10},
       ],
+      newPostText: "",
     },
     dialogsPage: {
       dialogs: [
@@ -90,47 +82,36 @@ export const store: StoreType = {
     },
     sidebar: {}
   },
-  updateNewPostText(newText: string) {
-    this._state.profilePage.newPostText = newText
-    this._ocChange()
-  },
-  addPost(newPostText: string) {
-    const newPost: MyPostsArrayProps = {
-      id: 5,
-      message: newPostText,
-      likesCount: 0
-    }
-    this._state.profilePage.posts.push(newPost);
-    this._ocChange()
-  },
-  _ocChange() {
+   _ocChange() {
     console.log('State changed')
-  },
-  _subscribe(callBack) {
-    this._ocChange = callBack
   },
   getState() {
     return this._state
   },
+  _subscribe(callBack) {
+    this._ocChange = callBack
+  },
+/*  addPost(newPostText: string) {
+    const newPost: MyPostsArrayProps = {
+      id: 5,
+      message:newPostText,
+      likesCount: 0
+    }
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._ocChange()
+  },*/
+ /* updateNewPostText(newText: string) {
+    this._state.profilePage.newPostText = newText
+    this._ocChange()
+  },*/
   dispatch(action) {
-
+    console.log('profilePage:', this._state)
     this._state.profilePage = profileReducer(this._state.profilePage, action)
     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
     this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-
     this._ocChange();
-
   }
 }
-/*
-export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
-export const addPostTextActionCreator = (newPostText: string) =>
-  ({type: UPDATE_NEW_POST, newPostText: newPostText} as const)
-
-export const sendMessageCreator = () => ({type: SEND_MESSAGE} as const)
-export const updateNewMessageBodyCreator = (body: string) =>
-  ({type: UPDATE_NEW_MESSAGE_BODY, body: body} as const)
-*/
-
 
 

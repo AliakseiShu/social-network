@@ -1,19 +1,15 @@
 import React, { ChangeEvent, useRef } from 'react';
 import s from './MyPosts.module.css';
 import { Post } from "./Post/Post";
-import { addPostTextActionCreator} from "../../../redux/profile-reducer";
+import { addPostActionCreator, addPostTextActionCreator } from "../../../redux/profile-reducer";
 import { ActionsTypes, MyPostsArrayProps } from "../../../redux/state";
 
 
 type PropsType = {
   posts: MyPostsArrayProps[]
-  // addPost: (newPostText: string) => void
   newPostText: string
-  // updateNewPostText: (newText: string) => void
   dispatch: (action: ActionsTypes) => void
-/*  store: StoreType*/
 }
-
 
 export const MyPosts = (props: PropsType) => {
   let postsElements =
@@ -22,18 +18,13 @@ export const MyPosts = (props: PropsType) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null);
 
   let addPost = () => {
-  /*  props.dispatch(addPostActionCreator())
-    props.dispatch('')*/
-    /*  if (newPostElement.current?.value) {
-        props.addPost(newPostElement.current.value)
-        newPostElement.current.value = ''
-      } else {
-        alert('newPostElement is null')
-      }*/
+        props.dispatch(addPostActionCreator(props.newPostText))
   }
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+
     let action = e.currentTarget.value
+    debugger
     props.dispatch(addPostTextActionCreator(action))
   }
 
