@@ -1,4 +1,4 @@
-import { MyPostsArrayProps, ProfilePageType } from "./state";
+import { MyPostsArrayProps, ProfilePageType } from "./store";
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST = 'UPDATE_NEW_POST_TEXT';
