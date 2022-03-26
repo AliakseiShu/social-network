@@ -10,13 +10,13 @@ type ActionProfileTypes =
   ChangeNewTextActionType
 
 let initialState = {
-    posts: [
-      {id: 1, message: 'Hi, how are you?', likesCount: 12},
-      {id: 2, message: "It's my first post", likesCount: 10},
-    ],
-    newPostText: "",
-  }
-const ProfileReducer = (state: ProfilePageType = initialState, action: ActionProfileTypes):ProfilePageType => {
+  posts: [
+    {id: 1, message: 'Hi, how are you?', likesCount: 12},
+    {id: 2, message: "It's my first post", likesCount: 10},
+  ],
+  newPostText: "",
+}
+const ProfileReducer = (state: ProfilePageType = initialState, action: ActionProfileTypes): ProfilePageType => {
   switch (action.type) {
     case ADD_POST:
       let newPost: MyPostsArrayProps = {

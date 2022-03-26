@@ -43,7 +43,7 @@ export type StoreType = {
   _subscribe: (callBack: () => void) => void
   getState: () => RootStateType
   dispatch: (action: ActionsTypes) => void
-}
+ }
 
 export type ActionsTypes = any
 
@@ -83,7 +83,6 @@ export const store: StoreType = {
   _subscribe(callBack) {
     this._ocChange = callBack
   },
-
   dispatch(action) {
     console.log('profilePage:', this._state)
     this._state.profilePage = profileReducer(this._state.profilePage, action)
