@@ -28,7 +28,6 @@ const ProfileReducer = (state: ProfilePageType = initialState, action: ActionPro
       state.newPostText = '';
       return state
     case UPDATE_NEW_POST:
-      debugger
       state.newPostText = action.newPostText;
       return state
     default:

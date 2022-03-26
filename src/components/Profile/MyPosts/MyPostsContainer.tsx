@@ -12,9 +12,8 @@ type MyPostsContainerType = {
 export const MyPostsContainer = (props: MyPostsContainerType) => {
 
   let state = props.store.getState()
-
   let addPost = () => {
-      props.store.dispatch(addPostActionCreator(''))
+      props.store.dispatch(addPostActionCreator(state.profilePage.newPostText))
   }
 
   let onPostChange = (text: string) => {

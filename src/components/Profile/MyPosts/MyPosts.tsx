@@ -27,10 +27,6 @@ export const MyPosts = (props: PropsType) => {
     props.addPostText(text)
   }
 
-  /*   let action = e.currentTarget.value
-     props.dispatch(addPostTextActionCreator(action))
-   }*/
-
   return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>

@@ -5,10 +5,7 @@ import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
 
 
 type PropsType = {
- /* profilePage: ProfilePageType
-  dispatch: (action: ActionsTypes) => void*/
   store: Store
-
  }
 
 export const Profile = (props: PropsType) => {
