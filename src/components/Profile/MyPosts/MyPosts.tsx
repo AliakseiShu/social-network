@@ -18,18 +18,12 @@ export const MyPosts = (props: PropsType) => {
 
   let onAddPost = () => {
     props.addPost()
-
-    /* props.dispatch(addPostActionCreator(props.newPostText))*/
-  }
+    }
 
   let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     let text = e.currentTarget.value
     props.addPostText(text)
   }
-
-  /*   let action = e.currentTarget.value
-     props.dispatch(addPostTextActionCreator(action))
-   }*/
 
   return (
     <div className={s.postsBlock}>

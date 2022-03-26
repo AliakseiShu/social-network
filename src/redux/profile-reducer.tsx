@@ -1,5 +1,3 @@
-import { MyPostsArrayProps, ProfilePageType } from "./store";
-
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST = 'UPDATE_NEW_POST_TEXT';
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
@@ -9,14 +7,22 @@ type ActionProfileTypes =
   AddPostActionType |
   ChangeNewTextActionType
 
+export type MyPostsArrayProps = {
+  id: number
+  message: string
+  likesCount: number
+}
+
 let initialState = {
   posts: [
     {id: 1, message: 'Hi, how are you?', likesCount: 12},
     {id: 2, message: "It's my first post", likesCount: 10},
-  ],
+  ] as Array<MyPostsArrayProps>,
   newPostText: "",
 }
-const ProfileReducer = (state: ProfilePageType = initialState, action: ActionProfileTypes): ProfilePageType => {
+export type InitialStateType = typeof initialState
+
+const ProfileReducer = (state: InitialStateType = initialState, action: ActionProfileTypes): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
       let newPost: MyPostsArrayProps = {
@@ -28,7 +34,6 @@ const ProfileReducer = (state: ProfilePageType = initialState, action: ActionPro
       state.newPostText = '';
       return state
     case UPDATE_NEW_POST:
-      debugger
       state.newPostText = action.newPostText;
       return state
     default:

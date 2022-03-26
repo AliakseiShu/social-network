@@ -1,33 +1,36 @@
-import React, { ChangeEvent } from 'react';
-import s from './Dialogs.module.css';
-import { DialogItem } from "./DialogItem/DialogsItem";
-import { Message } from "./Message/Message";
+import React from 'react';
 import { sendMessageCreator, updateNewMessageBodyCreator } from "../../redux/dialogs-reducer";
-import { DialogItemType, MessageType } from "../../redux/store";
-import { Store } from "redux";
+import { DialogsPageType } from "../../redux/store";
 import { Dialogs } from "./Dialogs";
+import { connect } from "react-redux";
+import { AppStateType } from "../../redux/redux-store";
+import { Dispatch } from "redux";
 
 
-type PropsType = {
-   store: Store
+type MapStateToProps = {
+  dialogsPage:DialogsPageType
 }
 
-export const DialogsContainer = (props: PropsType) => {
-  let state = props.store.getState().dialogsPage
+type MapDispatchToProps = {
+  sendMessage: () => void
+  updateNewMessageBody: (body: string) => void
 
-  /*let dialogsElements = state.dialogs.map((d:DialogItemType) => <DialogItem name={d.name} id={d.id}/>)
-  let messagesElements = state.messages.map((m:MessageType)=> <Message message={m.message}/>)
-  let newMessagesBody = state.newMessageBody*/
-
-  let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageCreator())
-  }
-  let onNewMessageChange = (body: string) => {
-        props.store.dispatch(updateNewMessageBodyCreator(body))
-  }
-  return (
-   <Dialogs updateNewMessageBody={onNewMessageChange}
-            sendMessage={onSendMessageClick}
-            dialogsPage={state}/>
-  )
 }
+
+let mapStateToProps = (state: AppStateType):MapStateToProps => {
+  return {
+    dialogsPage: state.dialogsPage
+  }
+}
+let mapDispatchToProps = (dispatch:Dispatch):MapDispatchToProps => {
+  return {
+    sendMessage: () => {
+      dispatch(sendMessageCreator())
+    },
+    updateNewMessageBody: (body: string) => {
+      dispatch(updateNewMessageBodyCreator(body))
+    }
+  }
+}
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

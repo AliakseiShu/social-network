@@ -4,19 +4,16 @@ import { Store } from "redux";
 import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
 
 
-type PropsType = {
- /* profilePage: ProfilePageType
-  dispatch: (action: ActionsTypes) => void*/
+
+/*type PropsType = {
   store: Store
+ }*/
 
- }
-
-export const Profile = (props: PropsType) => {
+export const Profile = () => {
   return (
     <div>
       <ProfileInfo/>
-      <MyPostsContainer store={props.store}
-      />
+      <MyPostsContainer/>
     </div>
   )
 }
