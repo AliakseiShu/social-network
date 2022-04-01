@@ -11,12 +11,10 @@ import { ActionsTypes, RootStateType } from "./redux/store";
 import { Store } from "redux";
 import { DialogsContainer } from "./components/Dialogs/DialogsContainer";
 
-
 type PropsType = {
   state: RootStateType
   store: Store
   dispatch: (action: ActionsTypes) => void
-
 }
 const App: React.FC<PropsType> = (props) => {
   return (
@@ -28,8 +26,13 @@ const App: React.FC<PropsType> = (props) => {
           <Routes>
             <Route path='/profile/*'
                    element={<Profile
+                     /*  profilePage={props.state.profilePage}
+                       dispatch={props.dispatch}*/
+                     store={props.store}
                    />}/>
-            <Route path='/dialogs/*' element={<DialogsContainer/>}/>
+            <Route path='/dialogs/*' element={<DialogsContainer
+              store={props.store}
+            />}/>
             <Route path='/news/*' element={<News/>}/>
             <Route path='/music/*' element={<Music/>}/>
             <Route path='/settings/*' element={<Settings/>}/>
