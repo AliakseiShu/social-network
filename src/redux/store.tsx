@@ -1,9 +1,10 @@
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import { ProfileType } from "../components/Profile/ProfileContainer";
 
 export type RootStateType = {
-  profilePage: ProfilePageType
+  profilePage: ProfileType | null
   dialogsPage: DialogsPageType
   sidebar: SidebarType
 }
@@ -29,6 +30,8 @@ export type MyPostsArrayProps = {
 export type ProfilePageType = {
   posts: MyPostsArrayProps[]
   newPostText: string
+
+
 }
 
 export type DialogsPageType = {
@@ -43,18 +46,39 @@ export type StoreType = {
   _subscribe: (callBack: () => void) => void
   getState: () => RootStateType
   dispatch: (action: ActionsTypes) => void
- }
+}
 
 export type ActionsTypes = any
 
-export const store: StoreType = {
+/*export const store: StoreType = {
   _state: {
     profilePage: {
-      posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 12},
-        {id: 2, message: "It's my first post", likesCount: 10},
-      ],
-      newPostText: "",
+      contacts: {
+        vk: "vk.com/dimych",
+        instagram: "instagra.com/sds",
+        github: "aaa",
+        mainLink: "bbb",
+        twitter: "ccc",
+        website: "www",
+        youtube: "yyy",
+        facebook: "fff"
+      },
+
+      fullName: "samurai dimych",
+      lookingForAJob: true,
+      lookingForAJobDescription: "не ищу, а дурачусь",
+      userId: 2,
+      photos: {
+        small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+        large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0",
+      },
+
+
+      /!*      posts: [
+              {id: 1, message: 'Hi, how are you?', likesCount: 12},
+              {id: 2, message: "It's my first post", likesCount: 10},
+            ],
+            newPostText: "",*!/
     },
     dialogsPage: {
       dialogs: [
@@ -74,15 +98,19 @@ export const store: StoreType = {
     },
     sidebar: {}
   },
-  _ocChange() {
+  _ocChange
+  () {
     console.log('State changed')
-  },
+  }
+  ,
   getState() {
     return this._state
-  },
+  }
+  ,
   _subscribe(callBack) {
     this._ocChange = callBack
-  },
+  }
+  ,
   dispatch(action) {
     console.log('profilePage:', this._state)
     this._state.profilePage = profileReducer(this._state.profilePage, action)
@@ -90,6 +118,6 @@ export const store: StoreType = {
     this._state.sidebar = sidebarReducer(this._state.sidebar, action)
     this._ocChange();
   }
-}
+}*/
 
 

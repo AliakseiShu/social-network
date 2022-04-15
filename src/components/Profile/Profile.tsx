@@ -1,18 +1,14 @@
 import React from 'react';
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
-import { Store } from "redux";
 import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
+import { MapStateToPropsType } from "./ProfileContainer";
 
 
+export const Profile = (props:MapStateToPropsType) => {
 
-/*type PropsType = {
-  store: Store
- }*/
-
-export const Profile = () => {
   return (
     <div>
-      <ProfileInfo/>
+      <ProfileInfo profile={props.profile}/>
       <MyPostsContainer/>
     </div>
   )

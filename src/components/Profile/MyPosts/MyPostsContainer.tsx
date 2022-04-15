@@ -16,12 +16,14 @@ type MapDispatchToProps = {
   addPost:()=>void
 }
 
+
 const mapStateToProps = (state: AppStateType):MapStateToProps => {
   return {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText
   }
 }
+
 const mapDispatchToProps = (dispatch:Dispatch):MapDispatchToProps => {
   return {
     addPostText: (text: string) => {
