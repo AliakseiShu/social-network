@@ -8,7 +8,10 @@ export const Profile = (props:MapStateToPropsType) => {
 
   return (
     <div>
-      <ProfileInfo profile={props.profile}/>
+      <ProfileInfo
+          profile={props.profile}
+          isAuth={props.isAuth}
+      />
       <MyPostsContainer/>
     </div>
   )

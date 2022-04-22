@@ -1,4 +1,6 @@
-import { MapStateToPropsType, ProfileType } from "../components/Profile/ProfileContainer";
+import {ProfileType} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../components/api/api";
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST = 'UPDATE_NEW_POST_TEXT';
@@ -69,6 +71,10 @@ export const addPostTextActionCreator = (newPostText: string) =>
   ({type: UPDATE_NEW_POST, newPostText: newPostText} as const)
 export const setUserProfile = (profile:ProfileType) =>
   ({type: SET_USER_PROFiILE, profile: profile} as const)
-
+export const getUserProfile = (userId:string) =>(dispatch:Dispatch)=> {
+  usersAPI.getProfile(userId).then(response => {
+    dispatch(setUserProfile(response.data))
+  })
+}
 
 export default ProfileReducer
