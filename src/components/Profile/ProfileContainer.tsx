@@ -65,7 +65,6 @@ class ProfileAPIContainer extends React.Component<PropsType> {
                 profile={this.props.profile}
                 isAuth={this.props.isAuth}
             />
-
         )
     }
 }
@@ -73,8 +72,8 @@ class ProfileAPIContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth
-
 })
+
 let WithUrlDataContainerComponent = withRouter(ProfileAPIContainer)
 
 export const ProfileContainer = connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
