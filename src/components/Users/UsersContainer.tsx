@@ -4,6 +4,9 @@ import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, Use
 import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {compose} from 'redux';
+import {withRouter} from 'react-router-dom';
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
 
 type MapStateToProps = {
     users: UserType[]
@@ -64,11 +67,15 @@ let mapStateToProps = (state: AppStateType): MapStateToProps => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,
-    {
-        follow,
-        unfollow,
-        setCurrentPage,
-        toggleFollowingProgress,
-        getUsers
-    })(UsersAPIComponent);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps,
+        {
+            follow,
+            unfollow,
+            setCurrentPage,
+            toggleFollowingProgress,
+            getUsers
+        }),
+    withRouter,
+    withAuthRedirect
+)(UsersAPIComponent)
