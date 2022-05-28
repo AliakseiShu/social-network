@@ -2,10 +2,10 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, updateUserStatus} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router'
 import {compose} from "redux";
-import {withAuthRedirect} from "../hoc/withAuthRedirect";
+
 
 type ContactsPropsType = {
     github: string
@@ -34,11 +34,13 @@ export type ProfileType = {
 
 export type MapStateToPropsType = {
     profile: ProfileType | null
+    status: string
 }
 
 type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
-
+    getUserStatus: (userId: string) => void
+    updateUserStatus: (status: string) => void
 }
 
 export type ProfileAPIContainerType = MapStateToPropsType & MapDispatchToPropsType
@@ -55,9 +57,11 @@ class ProfileAPIContainer extends React.Component<PropsType> {
 
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            userId = '22959'
         }
         this.props.getUserProfile(userId)
+        this.props.getUserStatus(userId)
+
     }
 
     render() {
@@ -65,6 +69,8 @@ class ProfileAPIContainer extends React.Component<PropsType> {
             <Profile
                 {...this.props}
                 profile={this.props.profile}
+                status={this.props.status}
+                updateUserStatus={this.props.updateUserStatus}
             />
         )
     }
@@ -72,9 +78,11 @@ class ProfileAPIContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
     withRouter,
+    //withAuthRedirect
 )(ProfileAPIContainer)

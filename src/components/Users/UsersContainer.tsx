@@ -76,6 +76,5 @@ export default compose<React.ComponentType>(
             toggleFollowingProgress,
             getUsers
         }),
-    withRouter,
     withAuthRedirect
 )(UsersAPIComponent)
