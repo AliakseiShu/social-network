@@ -1,51 +1,49 @@
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
-import { ProfileType } from "../components/Profile/ProfileContainer";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 export type RootStateType = {
-  profilePage: ProfileType | null
-  dialogsPage: DialogsPageType
-  sidebar: SidebarType
+    profilePage: ProfileType | null
+    dialogsPage: DialogsPageType
+    sidebar: SidebarType
 }
 
 export type DialogItemType = {
-  id: number
-  name: string
+    id: number
+    name: string
+    newMessageBody: string
 }
 
 export type MessageType = {
-  id: number
-  message: string
+    id: number
+    message: string
 }
 
 export type SidebarType = {}
 
 export type MyPostsArrayProps = {
-  id: number
-  message: string
-  likesCount: number
+    id: number
+    message: string
+    likesCount: number
 }
 
 export type ProfilePageType = {
-  posts: MyPostsArrayProps[]
-  newPostText: string
+    posts: MyPostsArrayProps[]
+    newPostText: string
 
 
 }
 
 export type DialogsPageType = {
-  dialogs: DialogItemType[],
-  messages: MessageType[]
-  newMessageBody: string
+    dialogs: DialogItemType[],
+    messages: MessageType[]
+    //newMessageBody: string
 }
 
 export type StoreType = {
-  _state: RootStateType
-  _ocChange: () => void
-  _subscribe: (callBack: () => void) => void
-  getState: () => RootStateType
-  dispatch: (action: ActionsTypes) => void
+    _state: RootStateType
+    _ocChange: () => void
+    _subscribe: (callBack: () => void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type ActionsTypes = any
