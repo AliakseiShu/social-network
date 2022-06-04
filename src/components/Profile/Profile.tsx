@@ -1,19 +1,19 @@
 import React from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {MapStateToPropsType, ProfileType} from "./ProfileContainer";
+import {ProfileType} from "./ProfileContainer";
 
 export type ProfilePropsType = {
     profile: ProfileType | null
     status: string
-    updateUserStatus:(status: string) => void
+    updateUserStatus: (status: string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
 
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus} />
+            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
             <MyPostsContainer/>
         </div>
     )

@@ -17,8 +17,6 @@ export const Dialogs = (props: PropsType) => {
 
     let dialogsElements = state.dialogs.map((d: DialogItemType) => <DialogItem name={d.name} key={d.id} id={d.id}/>)
     let messagesElements = state.messages.map((m: MessageType) => <Message message={m.message} key={m.id}/>)
-    //let newMessagesBody = state.newMessageBody
-
 
     let addNewMessage = (values: any) => {
         props.sendMessage(values.newMessagesBody)
@@ -39,9 +37,6 @@ export const Dialogs = (props: PropsType) => {
 
 type FormDataType = {
     message: string
-    // Login: string
-    // password: string
-    // rememberMe: boolean
 }
 
 const AddMassageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
