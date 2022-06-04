@@ -1,6 +1,5 @@
 import React from 'react';
 import {sendMessageCreator} from "../../redux/dialogs-reducer";
-
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";

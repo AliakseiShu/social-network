@@ -3,7 +3,11 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {DialogItemType, DialogsPageType, MessageType} from "../../redux/store";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {AddMassageFormRedux} from "./Message/AddMassageForm";
+
+
+
+
 
 type PropsType = {
     sendMessage: (newMessagesBody: string) => void
@@ -35,6 +39,7 @@ export const Dialogs = (props: PropsType) => {
     )
 }
 
+/*
 type FormDataType = {
     message: string
 }
@@ -51,4 +56,4 @@ const AddMassageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         </form>
     )
 }
-const AddMassageFormRedux = reduxForm<FormDataType>({form: 'dialogAddMassageForm'})(AddMassageForm)
+const AddMassageFormRedux = reduxForm<FormDataType>({form: 'dialogAddMassageForm'})(AddMassageForm)*/
