@@ -2,21 +2,33 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {required} from "../utils/validators/validators";
 import {Input} from "../common/FormsControls/FormsControls";
-
-
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import {Redirect} from 'react-router-dom';
 
 type FormDataType = {
-    Login: string
+    email: string
     password: string
     rememberMe: boolean
 }
+
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"Login"}
-                       name={"login"}
+                <Field placeholder={"Email"}
+                       name={"email"}
                        validate={[required]}
                        component={Input}/>
             </div>
@@ -24,7 +36,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field placeholder={"Password"}
                        name={"password"}
                        validate={[required]}
-                       component={Input}/>
+                       component={Input}
+                       type={"password"}/>
             </div>
             <div>
                 <Field component={Input}
@@ -40,9 +53,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = () => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({isAuth: state.auth.isAuth})
+
+const Login = (props: PropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.login(formData.email, formData.password, formData.rememberMe)
+    }
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
     }
     return (
         <div>
@@ -51,4 +69,6 @@ const Login = () => {
         </div>
     );
 };
-export default Login;
+
+export const LoginContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>
+(mapStateToProps, {login})(Login)
