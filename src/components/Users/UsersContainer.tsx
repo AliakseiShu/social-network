@@ -1,10 +1,17 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, UserType} from "../../redux/users-reducer";
+import {follow,requestUsers, setCurrentPage, toggleFollowingProgress, unfollow, UserType} from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from 'redux';
+import {
+    getPageSize,
+    getTotalUsersCount,
+    getCurrentPage,
+    getIsFetching,
+    getFollowingInProgress, getUsers
+} from "../../redux/users-selectors";
 
 type MapStateToProps = {
     users: UserType[]
@@ -52,6 +59,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
     }
 }
 
+/*
 let mapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         users: state.usersPage.users,
@@ -62,7 +70,18 @@ let mapStateToProps = (state: AppStateType): MapStateToProps => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
+*/
 
+let mapStateToProps = (state: AppStateType): MapStateToProps => {
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
+    }
+}
 export default compose<React.ComponentType>(
     connect(mapStateToProps,
         {
@@ -70,6 +89,6 @@ export default compose<React.ComponentType>(
             unfollow,
             setCurrentPage,
             toggleFollowingProgress,
-            getUsers
+            getUsers: requestUsers
         }),
 )(UsersAPIComponent)
