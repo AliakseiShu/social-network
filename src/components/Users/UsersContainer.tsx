@@ -5,8 +5,6 @@ import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from 'redux';
-import {withRouter} from 'react-router-dom';
-import {withAuthRedirect} from "../hoc/withAuthRedirect";
 
 type MapStateToProps = {
     users: UserType[]
@@ -38,7 +36,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
     }
 
     render() {
-
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users
@@ -50,7 +47,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 followingInProgress={this.props.followingInProgress}
-
             />
         </>
     }
@@ -76,5 +72,4 @@ export default compose<React.ComponentType>(
             toggleFollowingProgress,
             getUsers
         }),
-    withAuthRedirect
 )(UsersAPIComponent)

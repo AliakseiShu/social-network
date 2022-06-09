@@ -14,7 +14,6 @@ type MapStateToProps = {
 
 type MapDispatchToProps = {
     sendMessage: (newMessagesBody: string) => void
-
 }
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
