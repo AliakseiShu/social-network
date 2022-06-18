@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
-import ProfileStatus from './ProfileStatus';
 import {ProfilePropsType} from "../Profile";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 export const ProfileInfo = (props: ProfilePropsType) => {
@@ -17,7 +17,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
                 <div>
-                    <ProfileStatus status={props.status} editMode={false} updateUserStatus={props.updateUserStatus}/>
+                    <ProfileStatusWithHooks status={props.status} editMode={false} updateUserStatus={props.updateUserStatus}/>
                 </div>
             </div>
         </div>
