@@ -14,30 +14,27 @@ type PropsType = {
     addPost:(newPostText:string)=>void
 
 }
+export const MyPosts = React.memo( (props: PropsType) => {
+    let postsElements =
+        props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-export class MyPosts extends React.Component<PropsType> {
-    render() {
-        let postsElements =
-            this.props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
-
-        //let newPostElement = useRef<HTMLTextAreaElement>(null);
+    //let newPostElement = useRef<HTMLTextAreaElement>(null);
 
 
-        let addPostChange = (values: any) => {
-            this.props.addPost(values.newPostText)
-        }
-
-        return (
-            <div className={s.postsBlock}>
-                <h3>My posts</h3>
-                <AddMyPostsFormRedux onSubmit={addPostChange}/>
-                <div className={s.posts}>
-                    {postsElements}
-                </div>
-            </div>
-        )
+    let addPostChange = (values:any) => {
+        props.addPost(values.newPostText)
     }
-}
+
+    return (
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <AddMyPostsFormRedux onSubmit={addPostChange}/>
+              <div className={s.posts}>
+                {postsElements}
+            </div>
+        </div>
+    )
+})
 
 type FormDataType = {
     newPostText: string
