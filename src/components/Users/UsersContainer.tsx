@@ -17,8 +17,8 @@ import {
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
-    getTotalUsersCount, getUsers,
-
+    getTotalUsersCount,
+    getUsers,
 } from "../../redux/users-selectors";
 
 type MapStateToProps = {
@@ -43,11 +43,13 @@ export type UsersPropsType = MapStateToProps & MapDispatchToProps
 class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (currentPage: number) => {
-        this.props.getUsers(currentPage, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     render() {

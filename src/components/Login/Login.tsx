@@ -25,6 +25,7 @@ type MapDispatchToPropsType = {
 type PropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>

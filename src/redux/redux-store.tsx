@@ -16,7 +16,6 @@ let rootReducers = combineReducers({
     auth: authReducer,
     app:appReducer,
     form: formReducer
-
 })
 
 export type AppStateType = ReturnType<typeof rootReducers>
@@ -27,7 +26,6 @@ type ActionAllThunkType = ActionAuthTypes | ActionAppTypes
 
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,AppStateType,unknown, ActionAllThunkType>
-
 
 // @ts-ignore
 window.store = store

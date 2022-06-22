@@ -10,7 +10,6 @@ export type ProfilePropsType = {
 }
 
 export const Profile = (props: ProfilePropsType) => {
-
     return (
         <div>
             <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
