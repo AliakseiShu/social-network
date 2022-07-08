@@ -24,6 +24,7 @@ import {
 type MapStateToProps = {
     users: UserType[]
     pageSize: number
+    portionSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
@@ -58,6 +59,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
             <Users
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
+                portionSize={this.props.portionSize}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
@@ -73,6 +75,7 @@ let mapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
+        portionSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),

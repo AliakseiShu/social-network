@@ -44,6 +44,7 @@ export type UserType = {
 let initialState: InitialStateType = {
     users: [],
     pageSize: 10,
+    portionSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
@@ -52,6 +53,7 @@ let initialState: InitialStateType = {
 export type InitialStateType = {
     users: UserType[]
     pageSize: number
+    portionSize:number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
