@@ -7,6 +7,7 @@ import authReducer, {ActionAuthTypes} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import appReducer, {ActionAppTypes} from "./app-reducer";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 let rootReducers = combineReducers({
     profilePage: profileReducer,
@@ -20,10 +21,7 @@ let rootReducers = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducers>
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
-
-//let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
+const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 type ActionAllThunkType = ActionAuthTypes | ActionAppTypes
 
