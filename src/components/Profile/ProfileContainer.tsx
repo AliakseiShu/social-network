@@ -6,7 +6,6 @@ import {getUserProfile, getUserStatus, updateUserStatus} from "../../redux/profi
 import {RouteComponentProps, withRouter} from 'react-router'
 import {compose} from "redux";
 
-
 type ContactsPropsType = {
     github: string
     vk: string
@@ -92,5 +91,4 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
     withRouter,
-    //withAuthRedirect
 )(ProfileAPIContainer)
