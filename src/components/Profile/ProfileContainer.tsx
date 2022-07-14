@@ -54,8 +54,7 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileAPIContainerType &
 
 class ProfileAPIContainer extends React.Component<PropsType> {
 
-    componentDidMount() {
-
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId
@@ -65,6 +64,16 @@ class ProfileAPIContainer extends React.Component<PropsType> {
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
+    }
+
+
+    componentDidMount() {
+        this.refreshProfile()
+
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        this.refreshProfile()
     }
 
     render() {

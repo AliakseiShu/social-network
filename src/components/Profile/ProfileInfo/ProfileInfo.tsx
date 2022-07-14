@@ -12,7 +12,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
     return (
         <div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto}/>
+                <img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
                 <div>
                     <ProfileStatusWithHooks status={props.status} editMode={false}
                                             updateUserStatus={props.updateUserStatus}/>
