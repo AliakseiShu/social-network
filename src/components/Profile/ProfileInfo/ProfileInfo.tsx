@@ -37,7 +37,6 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 					})}
 					</div>
 				</div>
-
 				<div>
 					<ProfileStatusWithHooks
 						status={props.status}
@@ -50,8 +49,8 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 }
 
 type ContactType = {
-	contactTitle: any,
-	contactValue: any,
+	contactTitle: string,
+	contactValue: string,
 }
 
 const Contact = (props: ContactType) => {
