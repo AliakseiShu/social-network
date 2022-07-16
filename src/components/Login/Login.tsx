@@ -8,7 +8,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {Redirect} from 'react-router-dom';
 import styles from './../common/FormsControls/FormsControls.module.css'
 
-type FormDataType = {
+export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean

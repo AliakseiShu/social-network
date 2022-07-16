@@ -4,6 +4,7 @@ import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/imeges/user.png";
+import {FormDataType} from "../../Login/Login";
 
 export const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -16,6 +17,9 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 		if (e.target.file.length) {
 			props.savePhoto(e.target.file[0])
 		}
+	}
+	const onSubmit = (formData: FormDataType) => {
+		console.log(formData)
 	}
 
 	return (
@@ -30,7 +34,9 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 						updateUserStatus={props.updateUserStatus}
 						profile={props.profile}
 						isOwner={props.isOwner}
-						savePhoto={props.savePhoto}/>
+						savePhoto={props.savePhoto}
+						onSubmit={props.onSubmit}
+					/>
 					:
 					<ProfileData status={props.status}
 											 updateUserStatus={props.updateUserStatus}
@@ -80,8 +86,4 @@ const ProfileData = (props: ProfilePropsType) => {
 		</div>
 	</div>
 }
-const ProfileDataForm = (props: ProfilePropsType) => {
-	return <div>
-		Form
-	</div>
-}
+
