@@ -1,12 +1,19 @@
 import ProfileReducer, {addPostActionCreator, deletePost, MyPostsArrayProps} from "./profile-reducer";
-import {ProfileType} from "../components/Profile/ProfileContainer";
+import {ContactsPropsType, PhotoPropsType, ProfileType} from "../components/Profile/ProfileContainer";
 
 let initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It's my first post", likesCount: 10},
     ] as Array<MyPostsArrayProps>,
-    profile: null as ProfileType | null,
+    profile: {
+        userId: 0,
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        fullName: '',
+        contacts: {} as ContactsPropsType,
+        photos: {} as PhotoPropsType,
+    },
     status: "",
 }
 

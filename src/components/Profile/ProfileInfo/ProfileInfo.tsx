@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
@@ -6,6 +6,9 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/imeges/user.png";
 
 export const ProfileInfo = (props: ProfilePropsType) => {
+
+	const [editMode, setEditMode] = useState(false)
+
 	if (!props.profile) {
 		return <Preloader/>
 	}
@@ -20,23 +23,22 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 			<div className={s.descriptionBlock}>
 				<img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
 				{props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
-				<div>
-					<div>
-						<b>Full name</b>: {props.profile.fullName}
-					</div>
-					<div>
-						<b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}
-					</div>
-					{ props.profile.lookingForAJob &&
-					<div>
-						<b>My professional skills</b>: {props.profile.lookingForAJobDescription}
-					</div>}
-					<div>
-						<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
-							return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
-					})}
-					</div>
-				</div>
+
+				{ editMode
+					? <ProfileDataForm
+						status={props.status}
+						updateUserStatus={props.updateUserStatus}
+						profile={props.profile}
+						isOwner={props.isOwner}
+						savePhoto={props.savePhoto}/>
+					:
+					<ProfileData status={props.status}
+											 updateUserStatus={props.updateUserStatus}
+											 profile={props.profile}
+											 isOwner={props.isOwner}
+											 savePhoto={props.savePhoto}
+											 goToEditMode={() => setEditMode(true)}
+					/>}
 				<div>
 					<ProfileStatusWithHooks
 						status={props.status}
@@ -47,12 +49,39 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 		</div>
 	)
 }
-
 type ContactType = {
 	contactTitle: string,
 	contactValue: string,
 }
 
 const Contact = (props: ContactType) => {
-	return <div><b>props.contactTitle</b>: {props.contactValue}</div>
+	return <div className={s.contact}><b>props.contactTitle</b>: {props.contactValue}</div>
+}
+
+const ProfileData = (props: ProfilePropsType) => {
+	return <div>
+		{props.isOwner && <div>
+			<button onClick={props.goToEditMode}>edit</button>
+		</div>}
+		<div>
+			<b>Full name</b>: {props.profile.fullName}
+		</div>
+		<div>
+			<b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}
+		</div>
+		{props.profile.lookingForAJob &&
+		<div>
+			<b>My professional skills</b>: {props.profile.lookingForAJobDescription}
+		</div>}
+		<div>
+			<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
+			return <Contact contactTitle={key} contactValue={props.profile.contacts[key]}/>
+		})}
+		</div>
+	</div>
+}
+const ProfileDataForm = (props: ProfilePropsType) => {
+	return <div>
+		Form
+	</div>
 }

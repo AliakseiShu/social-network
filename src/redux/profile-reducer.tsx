@@ -1,4 +1,4 @@
-import {PhotoPropsType, ProfileType} from "../components/Profile/ProfileContainer";
+import {ContactsPropsType, PhotoPropsType, ProfileType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../components/api/api";
 
@@ -32,7 +32,14 @@ let initialState = {
 		{id: 1, message: 'Hi, how are you?', likesCount: 12},
 		{id: 2, message: "It's my first post", likesCount: 10},
 	] as Array<MyPostsArrayProps>,
-	profile: null as ProfileType | null,
+	profile: {
+		userId: 0,
+		lookingForAJob: false,
+		lookingForAJobDescription: '',
+		fullName: '',
+		contacts: {} as ContactsPropsType,
+		photos: {} as PhotoPropsType,
+	},
 	status: "",
 }
 
@@ -72,7 +79,7 @@ const ProfileReducer = (state: InitialStateType = initialState, action: ActionPr
 		case SAVE_PHOTO_SUCCESS: {
 			return {
 				...state,
-				//profile: {...state.profile, photos: action.photos}
+				profile: {...state.profile, photos: action.photos}
 			}
 		}
 		default:
