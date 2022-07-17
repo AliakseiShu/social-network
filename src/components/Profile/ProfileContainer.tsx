@@ -30,7 +30,7 @@ export type ProfileType = {
 	lookingForAJobDescription: string
 	fullName: string
 	contacts: ContactsPropsType
-	photos: PhotoPropsType,
+	photos: PhotoPropsType
 }
 
 export type MapStateToPropsType = {
@@ -44,7 +44,7 @@ type MapDispatchToPropsType = {
 	getUserProfile: (userId: string) => void
 	getUserStatus: (userId: string) => void
 	updateUserStatus: (status: string) => void
-	savePhoto:(file: string) => void
+	savePhoto:(file: PhotoPropsType) => void
 }
 
 export type ProfileAPIContainerType = MapStateToPropsType & MapDispatchToPropsType

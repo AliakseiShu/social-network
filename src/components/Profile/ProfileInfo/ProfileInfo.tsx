@@ -9,26 +9,26 @@ export type FormProfileDataType = {
 	fullName: string
 	lookingForAJobDescription: string
 	rememberMe: boolean
+
 }
 
 export const ProfileInfo = (props: ProfilePropsType) => {
 
-	const [editMode, setEditMode] = useState(false)
+	//const [editMode, setEditMode] = useState(false)
 
 	if (!props.profile) {
 		return <Preloader/>
 	}
-	const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files.length) {
-			const file = e.target.files[0]
-			console.log('file: ', file)
+	const onMainPhotoSelected = (e: any) => {
+		if (e.currentTarget.files.length) {
+			props.savePhoto(e.currentTarget.files[0])
 		}
+
+
+		/*const onSubmit = (props:FormProfileDataType) => {
+			//console.log(formData)
+		}*/
 	}
-
-	/*const onSubmit = (props:FormProfileDataType) => {
-		//console.log(formData)
-	}*/
-
 	return (
 		<div>
 			<div className={s.descriptionBlock}>
