@@ -1,12 +1,22 @@
-import {ProfilePropsType} from "../Profile";
 import React from "react";
-import {FormDataType} from "../../Login/Login";
 import {Input, Textarea} from "../../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
-import reduxForm, {Field} from "redux-form";
+import {Field} from "redux-form";
+import {ContactsPropsType, PhotoPropsType} from "../ProfileContainer";
 
-const ProfileDataForm = (props: ProfilePropsType) => {
-	return <form onSubmit={props.handleSubmit}>
+type ProfileDataFormType = {
+	userId: number
+	lookingForAJob: boolean
+	lookingForAJobDescription: string
+	fullName: string
+	contacts: ContactsPropsType
+	photos: PhotoPropsType,
+	//onSubmit: () => void
+}
+
+
+export const ProfileDataForm = (props: ProfileDataFormType) => {
+	return <form >
 		<div>
 			<button>save</button>
 		</div>
@@ -17,13 +27,13 @@ const ProfileDataForm = (props: ProfilePropsType) => {
 							validate={[required]}
 							component={Input}/>}
 		</div>
-		<div><b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}
+		<div><b>Looking for a job</b>: {props.lookingForAJob ? "yes" : "no"}
 			<Field component={Input}
 						 name={"rememberMe"}
 						 type={"checkbox"}/> remember me
 		</div>
 		<div>
-			<b>My professional skills</b>: {props.profile.lookingForAJobDescription}
+			<b>My professional skills</b>: {props.lookingForAJobDescription}
 			<Field placeholder={"My professional skills"}
 						 name={"lookingForAJobDescription"}
 						 validate={[required]}
@@ -31,5 +41,7 @@ const ProfileDataForm = (props: ProfilePropsType) => {
 		</div>
 	</form>
 }
-const ProfileDataFormReduxForm = reduxForm<FormDataType>({form: 'edit-profile'})(ProfileDataForm)
+/*
+const ProfileDataFormReduxForm = reduxForm<FormProfileDataType>({form: 'edit-profile'})(ProfileDataForm)
 export default ProfileDataFormReduxForm
+*/

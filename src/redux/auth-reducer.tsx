@@ -16,7 +16,6 @@ let initialState = {
     email: null,
     isAuth: false,
     logout: false
-
 }
 
 export type InitialStateType = typeof initialState

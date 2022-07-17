@@ -10,8 +10,6 @@ export type ProfilePropsType = {
 	isOwner: boolean
 	savePhoto:(file: string) => void
 	goToEditMode?: () => void
-	onSubmit: () => void
-
 }
 
 export const Profile = (props: ProfilePropsType) => {

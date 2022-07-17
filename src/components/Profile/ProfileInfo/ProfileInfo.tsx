@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/imeges/user.png";
-import {FormDataType} from "../../Login/Login";
+
+export type FormProfileDataType = {
+	fullName: string
+	lookingForAJobDescription: string
+	rememberMe: boolean
+}
 
 export const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -13,14 +18,16 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 	if (!props.profile) {
 		return <Preloader/>
 	}
-	const onMainPhotoSelected = (e: any) => {
-		if (e.target.file.length) {
-			props.savePhoto(e.target.file[0])
+	const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files.length) {
+			const file = e.target.files[0]
+			console.log('file: ', file)
 		}
 	}
-	const onSubmit = (formData: FormDataType) => {
-		console.log(formData)
-	}
+
+	/*const onSubmit = (props:FormProfileDataType) => {
+		//console.log(formData)
+	}*/
 
 	return (
 		<div>
@@ -28,14 +35,14 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 				<img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
 				{props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
 
-				{ editMode
+				{/*{ editMode
 					? <ProfileDataForm
 						status={props.status}
 						updateUserStatus={props.updateUserStatus}
 						profile={props.profile}
 						isOwner={props.isOwner}
 						savePhoto={props.savePhoto}
-						onSubmit={props.onSubmit}
+						onSubmit={onSubmit}
 					/>
 					:
 					<ProfileData status={props.status}
@@ -44,7 +51,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 											 isOwner={props.isOwner}
 											 savePhoto={props.savePhoto}
 											 goToEditMode={() => setEditMode(true)}
-					/>}
+					/>}*/}
 				<div>
 					<ProfileStatusWithHooks
 						status={props.status}
@@ -81,7 +88,7 @@ const ProfileData = (props: ProfilePropsType) => {
 		</div>}
 		<div>
 			<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
-			return <Contact contactTitle={key} contactValue={props.profile.contacts[key]}/>
+			//return <Contact contactTitle={key} contactValue={props.profile.contacts[key]}/>
 		})}
 		</div>
 	</div>
