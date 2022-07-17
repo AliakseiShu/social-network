@@ -1,15 +1,13 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
 import userPhoto from "../../../assets/imeges/user.png";
 import iconCamera from "../../../assets/imeges/red-camera-emblem-icon-vector-13566625.jpg";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import {styled} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
 import {SmallAvatar} from "./ProfileInfoStyles";
-
 
 
 export const ProfileInfo1 = (props: ProfilePropsType) => {
