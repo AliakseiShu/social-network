@@ -7,8 +7,6 @@ import {RouteComponentProps, withRouter} from 'react-router'
 import {compose} from "redux";
 
 export type ContactsPropsType = {
-	contactTitle: string,
-	contactValue: string,
 	github: string
 	vk: string
 	facebook: string
@@ -31,6 +29,7 @@ export type ProfileType = {
 	fullName: string
 	contacts: ContactsPropsType
 	photos: PhotoPropsType
+	aboutMe: string
 }
 
 export type MapStateToPropsType = {

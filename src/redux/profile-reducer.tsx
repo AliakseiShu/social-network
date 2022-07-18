@@ -39,6 +39,7 @@ let initialState = {
 		fullName: '',
 		contacts: {} as ContactsPropsType,
 		photos: {} as PhotoPropsType,
+		aboutMe:""
 	},
 	status: "",
 }

@@ -3,7 +3,7 @@ import {ContactsPropsType, PhotoPropsType, ProfileType} from "../components/Prof
 
 let initialState = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 12},
+        {id: 1, message: 'Hi, how are you?', likesCount: 12},
         {id: 2, message: "It's my first post", likesCount: 10},
     ] as Array<MyPostsArrayProps>,
     profile: {
@@ -13,9 +13,11 @@ let initialState = {
         fullName: '',
         contacts: {} as ContactsPropsType,
         photos: {} as PhotoPropsType,
+        aboutMe:""
     },
     status: "",
 }
+
 
 test(' length of post should be incremented', () => {
 

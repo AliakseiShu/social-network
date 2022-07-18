@@ -1,7 +1,7 @@
 import React from 'react';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {PhotoPropsType, ProfileType} from "./ProfileContainer";
-import {ProfileInfo1} from "./ProfileInfo/ProfileInfo1";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export type ProfilePropsType = {
 	profile: ProfileType
@@ -10,12 +10,13 @@ export type ProfilePropsType = {
 	isOwner: boolean
 	savePhoto: (file: PhotoPropsType) => void
 	goToEditMode?: () => void
+
 }
 
 export const Profile = (props: ProfilePropsType) => {
 	return (
 		<div>
-			<ProfileInfo1 profile={props.profile}
+			<ProfileInfo profile={props.profile}
 									 status={props.status}
 									 updateUserStatus={props.updateUserStatus}
 									 isOwner={props.isOwner}
