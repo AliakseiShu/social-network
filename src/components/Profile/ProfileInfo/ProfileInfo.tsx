@@ -8,9 +8,7 @@ import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
 import {SmallAvatar, useStyles} from "./stylesProfile";
-import ProfileDataForm from "./ProfileDataForm";
-
-
+import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
 
 export const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -26,6 +24,10 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 			const file = props.savePhoto(e.target.files[0])
 		}
 	};
+
+	const onSubmit = (formData: FormProfileDataType) => {
+		console.log(formData)
+	}
 
 	return (
 		<div>
@@ -52,7 +54,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 
 			{editMode
 				?
-				<ProfileDataForm/>
+				<ProfileDataForm onSubmit={props.} />
 				:
 				<ProfileData
 					profile={props.profile}
@@ -73,6 +75,8 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 }
 
 const ProfileData = (props: ProfilePropsType) => {
+
+
 	const styles = useStyles();
 	return (
 		<div className={styles.descriptionBlock}>
@@ -103,15 +107,6 @@ const ProfileData = (props: ProfilePropsType) => {
 		</div>
 	)
 }
-/*const ProfileDataForm = (props: ProfilePropsType) => {
-	const styles = useStyles();
-	return (
-		<div className={styles.descriptionBlock}>
-			Form
-		</div>
-	)
-}*/
-
 
 type ContactType = {
 	contactTitle: string

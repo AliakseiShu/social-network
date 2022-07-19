@@ -21,7 +21,6 @@ export const Profile = (props: ProfilePropsType) => {
 									 updateUserStatus={props.updateUserStatus}
 									 isOwner={props.isOwner}
 									 savePhoto={props.savePhoto}
-									 //goToEditMode={props.goToEditMode}
 			/>
 			<MyPostsContainer/>
 		</div>
