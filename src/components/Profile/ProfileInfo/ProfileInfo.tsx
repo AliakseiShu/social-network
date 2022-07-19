@@ -24,9 +24,9 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 			const file = props.savePhoto(e.target.files[0])
 		}
 	};
-
 	const onSubmit = (formData: FormProfileDataType) => {
-		console.log(formData)
+		//saveProfile(formData)
+		setEditMode(false)
 	}
 
 	return (
@@ -54,7 +54,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 
 			{editMode
 				?
-				<ProfileDataForm onSubmit={props.} />
+				<ProfileDataForm initialValues ={props.profile} /*profile={props.profile} onSubmit={props.onSubmit}*/ />
 				:
 				<ProfileData
 					profile={props.profile}
@@ -75,7 +75,6 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 }
 
 const ProfileData = (props: ProfilePropsType) => {
-
 
 	const styles = useStyles();
 	return (
@@ -101,7 +100,7 @@ const ProfileData = (props: ProfilePropsType) => {
 			<div>
 				<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
 				// @ts-ignore
-				return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
+				return <Contact	key={key}	contactTitle={key} contactValue={props.profile.contacts[key]}/>
 			})}
 			</div>
 		</div>

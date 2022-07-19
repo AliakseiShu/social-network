@@ -2,6 +2,7 @@ import React from 'react';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {PhotoPropsType, ProfileType} from "./ProfileContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {saveProfile} from "../../redux/profile-reducer";
 
 export type ProfilePropsType = {
 	profile: ProfileType
@@ -10,6 +11,7 @@ export type ProfilePropsType = {
 	isOwner: boolean
 	savePhoto: (file: PhotoPropsType) => void
 	goToEditMode?: () => void
+	saveProfile?:() => void
 
 }
 
@@ -21,6 +23,7 @@ export const Profile = (props: ProfilePropsType) => {
 									 updateUserStatus={props.updateUserStatus}
 									 isOwner={props.isOwner}
 									 savePhoto={props.savePhoto}
+									 saveProfile={props.saveProfile}
 			/>
 			<MyPostsContainer/>
 		</div>

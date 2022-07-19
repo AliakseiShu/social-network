@@ -16,7 +16,7 @@ type PropsType = {
 }
 export const MyPosts = React.memo( (props: PropsType) => {
     let postsElements =
-        props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+        props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     //let newPostElement = useRef<HTMLTextAreaElement>(null);
 
