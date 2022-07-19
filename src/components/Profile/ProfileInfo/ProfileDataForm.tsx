@@ -1,47 +1,55 @@
+import {useStyles} from "./stylesProfile";
 import React from "react";
-import {Input, Textarea} from "../../common/FormsControls/FormsControls";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {required} from "../../utils/validators/validators";
-import {Field} from "redux-form";
-import {ContactsPropsType, PhotoPropsType} from "../ProfileContainer";
+import {Input} from "../../common/FormsControls/FormsControls";
+import {ProfileType} from "../ProfileContainer";
 
-type ProfileDataFormType = {
-	userId: number
-	lookingForAJob: boolean
-	lookingForAJobDescription: string
+export type FormProfileDataType = {
 	fullName: string
-	contacts: ContactsPropsType
-	photos: PhotoPropsType,
-	//onSubmit: () => void
+	LookingForAJob: boolean
 }
 
 
-export const ProfileDataForm = (props: ProfileDataFormType) => {
-	return <form >
-		<div>
-			<button>save</button>
-		</div>
-		<div>
-			<b>Full name</b>:
-			{<Field placeholder={"Full name"}
-							name={"fullName"}
-							validate={[required]}
-							component={Input}/>}
-		</div>
-		<div><b>Looking for a job</b>: {props.lookingForAJob ? "yes" : "no"}
-			<Field component={Input}
-						 name={"rememberMe"}
-						 type={"checkbox"}/> remember me
-		</div>
-		<div>
-			<b>My professional skills</b>: {props.lookingForAJobDescription}
-			<Field placeholder={"My professional skills"}
-						 name={"lookingForAJobDescription"}
-						 validate={[required]}
-						 component={Textarea}/>
-		</div>
-	</form>
+const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> = (props) => {
+	const styles = useStyles();
+	return (
+		<form className={styles.descriptionBlock}>
+			<div>
+				<button onClick={() => {
+				}}>save
+				</button>
+			</div>
+			<div>
+				<b>Full name</b>: <Field placeholder={"Full name"}
+																 name={"fullName"}
+																 validate={[required]}
+																 component={Input}/>
+			</div>
+			<div>
+				<b>Looking for a job</b>: <Field name={"LookingForAJob"}
+																				 validate={[required]}
+																				 component={Input}
+																				 type={"checkbox"}/>
+			</div>
+
+			<div>
+				<b>My professional skills</b>:
+			</div>
+
+			<div>
+				<b>About me</b>:
+			</div>
+			{/*<div>
+				<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
+				// @ts-ignore
+				return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
+			})}
+			</div>*/}
+		</form>
+	)
 }
-/*
+
 const ProfileDataFormReduxForm = reduxForm<FormProfileDataType>({form: 'edit-profile'})(ProfileDataForm)
-export default ProfileDataFormReduxForm
-*/
+
+export default ProfileDataFormReduxForm;
