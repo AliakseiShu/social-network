@@ -1,5 +1,5 @@
 import axios from "axios";
-import {PhotoPropsType, ProfileType} from "../Profile/ProfileContainer";
+import {ProfileType} from "../Profile/ProfileContainer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -21,9 +21,8 @@ export const usersAPI = {
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
-
     },
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         console.warn('Obsolete method. Please profileAPI object.')
         return profileAPI.getProfile(userId)
     }
@@ -31,16 +30,16 @@ export const usersAPI = {
 
 export const profileAPI = {
 
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         return instance.get(`profile/${userId}`);
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`);
     },
     updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status});
     },
-    savePhoto(photoFile: string) {
+    savePhoto(photoFile: File) {
         const formData = new FormData()
         formData.append("image", photoFile)
         return instance.put(`profile/photo`, formData, {
@@ -50,7 +49,8 @@ export const profileAPI = {
         });
     },
     saveProfile(profile: ProfileType){
-        return instance.put(`profile`, profile);
+        return instance.put(`profile`, profile)
+          .then(response => response.data);
     }
 }
 

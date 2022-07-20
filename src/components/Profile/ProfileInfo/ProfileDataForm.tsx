@@ -10,11 +10,13 @@ export type ProfileFormProfileDataType = {
 }
 
 
-const ProfileDataForm: React.FC<InjectedFormProps<ProfileType,ProfileFormProfileDataType> & ProfileFormProfileDataType> = ({handleSubmit,error,profile}) => {
+const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, ProfileFormProfileDataType> & ProfileFormProfileDataType>
+	= ({handleSubmit, error, profile}) => {
+
 	const styles = useStyles();
 	return (
 		<form className={styles.descriptionBlock} onSubmit={handleSubmit}>
-			{error && <div className={s.formSummaryError}>{error}  </div>}
+			{error && <div className={s.formSummaryError}>{error}</div>}
 			<div>
 				<b>Full name</b>: <Field placeholder={"Full name"}
 																 name={"fullName"}
@@ -36,14 +38,14 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType,ProfileFormProfile
 																name={"aboutMe"}
 																component={Textarea}/>
 			</div>
-				<div>
-				<b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-				return <div key={key} className={styles.contact}>
+			<div>
+				<b>Contacts</b>: {Object.keys(profile.contacts).map(key =>
+				<div key={key} className={styles.contact}>
 					<b>{key}: <Field placeholder={key}
 													 name={"contacts." + key}
 													 component={Input}/></b>
 				</div>
-				})}
+			)}
 			</div>
 			<div>
 				<button>Save</button>

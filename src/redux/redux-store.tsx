@@ -9,7 +9,17 @@ import {reducer as formReducer} from 'redux-form'
 import appReducer, {ActionAppTypes} from "./app-reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 
+//types
 export type AppStateType = ReturnType<typeof rootReducers>
+
+type ActionAllThunkType =
+	| ActionAuthTypes
+	| ActionAppTypes
+	| ActionDialogsTypes
+	| ActionProfileTypes
+	| ActionUsersTypes
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionAllThunkType>
 
 let rootReducers = combineReducers({
 	profilePage: profileReducer,
@@ -21,17 +31,7 @@ let rootReducers = combineReducers({
 	form: formReducer
 })
 
-
 const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
-
-type ActionAllThunkType =
-	| ActionAuthTypes
-	| ActionAppTypes
-	| ActionDialogsTypes
-	| ActionProfileTypes
-	| ActionUsersTypes
-
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionAllThunkType>
 
 // @ts-ignore
 window.store = store

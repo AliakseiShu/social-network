@@ -8,6 +8,8 @@ import Stack from "@mui/material/Stack";
 import {SmallAvatar, useStyles} from "./stylesProfile";
 import {ProfileDataFormContainer} from "./ProfileDataForm";
 import {ContactsPropsType, ProfileType} from "../ProfileContainer";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import {getUserProfile} from "../../../redux/profile-reducer";
 
 type ContactType = {
 	contactTitle: string
@@ -71,7 +73,8 @@ type ProfileInfoPropsType = {
 	status: string
 }
 
-export const ProfileInfo: FC<ProfileInfoPropsType> = ({profile, savePhoto, saveProfile, isOwner,updateUserStatus, status}) => {
+export const ProfileInfo: FC<ProfileInfoPropsType> = (
+	{profile, savePhoto, saveProfile, isOwner,updateUserStatus, status}) => {
 
 	const [editMode, setEditMode] = useState(false)
 
@@ -114,6 +117,12 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = ({profile, savePhoto, saveP
 					</Badge>
 				</Stack>
 			</label>
+			<div className={styles.descriptionBlock}>
+				<ProfileStatusWithHooks
+					status={status}
+					editMode={false}
+					updateUserStatus={updateUserStatus}/>
+			</div>
 
 			{editMode
 				?
@@ -126,13 +135,6 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = ({profile, savePhoto, saveP
 					profile={profile}
 					isOwner={isOwner}
 					goToEditMode={() => setEditMode(true)}/>}
-
-		{/*	<div className={styles.descriptionBlock}>
-				<ProfileStatusWithHooks
-					status={props.status}
-					editMode={false}
-					updateUserStatus={props.updateUserStatus}/>
-			</div>*/}
 		</div>
 	)
 }

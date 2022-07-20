@@ -101,32 +101,32 @@ export const setUserPhotos = (photos: PhotoPropsType) =>
 
 
 //thunks
-export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number): AppThunk => async (dispatch) => {
 	let response = await usersAPI.getProfile(userId)
 	dispatch(setUserProfile(response.data))
 }
-export const getUserStatus = (userId: string) => async (dispatch: Dispatch) => {
+export const getUserStatus = (userId: number): AppThunk => async (dispatch) => {
 	let response = await profileAPI.getStatus(userId)
 	dispatch(setUserStatus(response.data))
 }
-export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
+export const updateUserStatus = (status: string): AppThunk => async (dispatch) => {
 	let response = await profileAPI.updateStatus(status)
 	if (response.data.resultCode === 0) {
 		dispatch(setUserStatus(status))
 	}
 }
-export const savePhoto = (photoFile: string) => async (dispatch: Dispatch) => {
+export const savePhoto = (photoFile: File): AppThunk => async (dispatch) => {
 	let response = await profileAPI.savePhoto(photoFile)
 	if (response.data.resultCode === 0) {
 		dispatch(setUserPhotos(response.data.data.photos))
 	}
 }
-export const saveProfile = (profile: ProfileType): AppThunk => async (dispatch: Dispatch, getState: () => AppStateType) => {
+export const saveProfile = (profile: ProfileType): AppThunk => async (dispatch, getState: () => AppStateType) => {
 	const userId = getState().auth.userId
 
 	let response = await profileAPI.saveProfile(profile)
 	if (response.data.resultCode === 0) {
-		dispatch(getUserStatus(userId as number))
+		dispatch(getUserProfile(userId as any))
 	} else {
 		dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
 		return Promise.reject(response.data.messages[0])
