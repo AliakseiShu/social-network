@@ -5,7 +5,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {saveProfile} from "../../redux/profile-reducer";
 
 export type ProfilePropsType = {
-	profile: ProfileType
+	profile: ProfileType | null
 	status: string
 	updateUserStatus: (status: string) => void
 	isOwner: boolean

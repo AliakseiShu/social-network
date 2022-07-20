@@ -33,7 +33,7 @@ export type ProfileType = {
 }
 
 export type MapStateToPropsType = {
-	profile: ProfileType
+	profile: ProfileType | null
 	status: string
 	authorizedUserId: any
 	isAuth: boolean
@@ -47,7 +47,10 @@ type MapDispatchToPropsType = {
 	saveProfile: (profile: ProfileType) => Promise<{}>
 }
 
-export type ProfileAPIContainerType = MapStateToPropsType & MapDispatchToPropsType
+export type ProfileAPIContainerType =
+	RouteComponentProps<PathParamsType>
+	& MapStateToPropsType
+	& MapDispatchToPropsType
 
 type PathParamsType = {
 	userId: string
@@ -73,7 +76,7 @@ class ProfileAPIContainer extends React.Component<PropsType> {
 		this.refreshProfile()
 	}
 
-	componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+	componentDidUpdate(prevProps: ProfileAPIContainerType) {
 		if (this.props.match.params.userId != prevProps.match.params.userId) {
 			this.refreshProfile()
 		}

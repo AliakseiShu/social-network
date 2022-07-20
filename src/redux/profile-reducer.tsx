@@ -8,13 +8,14 @@ const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFiILE = 'profile/SET_USER_PROFiILE';
 const SET_STATUS = 'profile/SET_STATUS';
 const DELETE_POST = 'profile/DELETE_POST';
-const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
+const SET_USER_PHOTO = 'profile/SAVE_PHOTO_SUCCESS';
 
+//types
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
 export type SetUserStatusType = ReturnType<typeof setUserStatus>
 export type DeletePostType = ReturnType<typeof deletePost>
-export type SetPhotoType = ReturnType<typeof savePhotoSuccess>
+export type SetPhotoType = ReturnType<typeof setUserPhotos>
 
 type ActionProfileTypes =
 	| AddPostActionType
@@ -34,15 +35,7 @@ let initialState = {
 		{id: 1, message: 'Hi, how are you?', likesCount: 12},
 		{id: 2, message: "It's my first post", likesCount: 10},
 	] as Array<MyPostsArrayProps>,
-	profile: {
-		userId: 0,
-		lookingForAJob: false,
-		lookingForAJobDescription: '',
-		fullName: '',
-		contacts: {} as ContactsPropsType,
-		photos: {} as PhotoPropsType,
-		aboutMe:""
-	},
+	profile: null as ProfileType | null,
 	status: "",
 }
 
@@ -79,16 +72,18 @@ const ProfileReducer = (state: InitialStateType = initialState, action: ActionPr
 				posts: state.posts.filter(p => p.id !== action.postId)
 			}
 		}
-		case SAVE_PHOTO_SUCCESS: {
+		case SET_USER_PHOTO: {
 			return {
 				...state,
-				profile: {...state.profile, photos: action.photos}
+				profile: {...state.profile, photos: action.photos} as ProfileType
 			}
 		}
 		default:
 			return state
 	}
 }
+
+//actions
 export const addPostActionCreator = (newPostText: string) =>
 	({type: ADD_POST, newPostText} as const)
 
@@ -101,9 +96,11 @@ export const setUserStatus = (status: string) =>
 export const deletePost = (postId: number) =>
 	({type: DELETE_POST, postId} as const)
 
-export const savePhotoSuccess = (photos: PhotoPropsType) =>
-	({type: SAVE_PHOTO_SUCCESS, photos} as const)
+export const setUserPhotos = (photos: PhotoPropsType) =>
+	({type: SET_USER_PHOTO, photos} as const)
 
+
+//thunks
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
 	let response = await usersAPI.getProfile(userId)
 	dispatch(setUserProfile(response.data))
@@ -121,7 +118,7 @@ export const updateUserStatus = (status: string) => async (dispatch: Dispatch) =
 export const savePhoto = (photoFile: string) => async (dispatch: Dispatch) => {
 	let response = await profileAPI.savePhoto(photoFile)
 	if (response.data.resultCode === 0) {
-		dispatch(savePhotoSuccess(response.data.data.photos))
+		dispatch(setUserPhotos(response.data.data.photos))
 	}
 }
 export const saveProfile = (profile: ProfileType) => async (dispatch: Dispatch, getState: () => AppStateType) => {

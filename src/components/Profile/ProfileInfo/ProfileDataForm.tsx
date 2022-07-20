@@ -14,9 +14,6 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType,ProfileFormProfile
 	const styles = useStyles();
 	return (
 		<form className={styles.descriptionBlock} onSubmit={handleSubmit}>
-			<div>
-				<button>save</button>
-			</div>
 			{error && <div className={s.formSummaryError}>{error}  </div>}
 			<div>
 				<b>Full name</b>: <Field placeholder={"Full name"}
@@ -47,6 +44,9 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType,ProfileFormProfile
 													 component={Input}/></b>
 				</div>
 				})}
+			</div>
+			<div>
+				<button>Save</button>
 			</div>
 		</form>
 	)
