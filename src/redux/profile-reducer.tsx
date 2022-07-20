@@ -1,5 +1,4 @@
-import {ContactsPropsType, PhotoPropsType, ProfileType} from "../components/Profile/ProfileContainer";
-import {Dispatch} from "redux";
+import {PhotoPropsType, ProfileType} from "../components/Profile/ProfileContainer";
 import {profileAPI, usersAPI} from "../components/api/api";
 import {AppStateType, AppThunk} from "./redux-store";
 import {stopSubmit} from "redux-form";
@@ -128,8 +127,8 @@ export const saveProfile = (profile: ProfileType): AppThunk => async (dispatch, 
 	if (response.data.resultCode === 0) {
 		dispatch(getUserProfile(userId as any))
 	} else {
-		dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
-		return Promise.reject(response.data.messages[0])
+		dispatch(stopSubmit('edit-profile', {_error: response.messages[0]}))
+		//return Promise.reject(response.messages[0])
 	}
 }
 export default ProfileReducer

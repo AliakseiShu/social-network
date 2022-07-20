@@ -9,7 +9,6 @@ import {SmallAvatar, useStyles} from "./stylesProfile";
 import {ProfileDataFormContainer} from "./ProfileDataForm";
 import {ContactsPropsType, ProfileType} from "../ProfileContainer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import {getUserProfile} from "../../../redux/profile-reducer";
 
 type ContactType = {
 	contactTitle: string
@@ -74,7 +73,7 @@ type ProfileInfoPropsType = {
 }
 
 export const ProfileInfo: FC<ProfileInfoPropsType> = (
-	{profile, savePhoto, saveProfile, isOwner,updateUserStatus, status}) => {
+	{profile, savePhoto, saveProfile, isOwner, updateUserStatus, status}) => {
 
 	const [editMode, setEditMode] = useState(false)
 
@@ -91,8 +90,9 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = (
 	};
 
 	const onSubmit = (formData: ProfileType) => {
-		saveProfile(formData).then()
-		setEditMode(false)
+		saveProfile(formData).then(() => {
+			setEditMode(false)
+		})
 	}
 
 	return (
@@ -129,7 +129,7 @@ export const ProfileInfo: FC<ProfileInfoPropsType> = (
 				<ProfileDataFormContainer
 					initialValues={profile}
 					profile={profile}
-					onSubmit={onSubmit} />
+					onSubmit={onSubmit}/>
 				:
 				<ProfileData
 					profile={profile}

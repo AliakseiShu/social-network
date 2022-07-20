@@ -9,7 +9,6 @@ export type ProfileFormProfileDataType = {
 	profile: ProfileType
 }
 
-
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, ProfileFormProfileDataType> & ProfileFormProfileDataType>
 	= ({handleSubmit, error, profile}) => {
 
