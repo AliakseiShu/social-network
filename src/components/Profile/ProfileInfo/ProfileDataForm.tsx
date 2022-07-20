@@ -3,16 +3,14 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input, Textarea} from "../../common/FormsControls/FormsControls";
 import s from '../../common/FormsControls/FormsControls.module.css'
+import {ProfileType} from "../ProfileContainer";
 
-export type FormProfileDataType = {
-	fullName: string
-	LookingForAJob: boolean
-	lookingForAJobDescription: string
-	aboutMe: string
+export type ProfileFormProfileDataType = {
+	profile: ProfileType
 }
 
 
-const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> = (props) => {
+const ProfileDataForm: React.FC<InjectedFormProps<>> = (props) => {
 	const styles = useStyles();
 	return (
 		<form className={styles.descriptionBlock} onSubmit={props.handleSubmit}>
@@ -55,6 +53,5 @@ const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> = (props
 	)
 }
 
-const ProfileDataFormReduxForm = reduxForm<FormProfileDataType>({form: 'edit-profile'})(ProfileDataForm)
+export const ProfileDataFormContainer = reduxForm<ProfileType, ProfileFormProfileDataType>({form: 'edit-profile'})(ProfileDataForm)
 
-export default ProfileDataFormReduxForm;

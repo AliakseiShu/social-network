@@ -1,15 +1,13 @@
-import React, {FC, useState} from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 import {Preloader} from "../../common/Preloader/Preloader";
-import {ProfilePropsType} from "../Profile";
 import userPhoto from "../../../assets/imeges/user.png";
 import iconCamera from "../../../assets/imeges/red-camera-emblem-icon-vector-13566625.jpg";
-import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
 import {SmallAvatar, useStyles} from "./stylesProfile";
-import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
-import {ProfileType} from "../ProfileContainer";
+import {ProfileDataFormContainer} from "./ProfileDataForm";
+import {ContactsPropsType, ProfileType} from "../ProfileContainer";
 
 type ContactType = {
 	contactTitle: string
@@ -27,22 +25,18 @@ type ProfileDataType = {
 	goToEditMode: () => void
 }
 
-const ProfileData: FC<ProfileDataType> = ({profile,isOwner,goToEditMode}) => {
+const ProfileData: FC<ProfileDataType> = ({profile, isOwner, goToEditMode}) => {
 
 	const styles = useStyles();
 
 	const contactsList = Object.keys(profile.contacts).map(key => {
-		const contactValue = profile.contacts[key as keyof ContactsType];
+		const contactValue = profile.contacts[key as keyof ContactsPropsType];
 		return <Contact key={key} contactTitle={key} contactValue={contactValue}/>;
 	});
 
-
 	return (
 		<div className={styles.descriptionBlock}>
-			{isOwner &&
-			<div>
-				<button onClick={goToEditMode}>edit</button>
-			</div>}
+			<h3>Profile info</h3>
 			<div>
 				<b>Full name</b>: {profile.fullName}
 			</div>
@@ -60,33 +54,41 @@ const ProfileData: FC<ProfileDataType> = ({profile,isOwner,goToEditMode}) => {
 			<div>
 				<b>Contacts</b>: {contactsList}
 			</div>
+			{isOwner &&
+			<div>
+				<button onClick={goToEditMode}>edit</button>
+			</div>}
 		</div>
 	)
 }
 
+type ProfileInfoPropsType = {
+	profile: ProfileType | null
+	savePhoto: (file: File) => void
+	saveProfile: (profile: ProfileType) => Promise<{}>
+	isOwner: boolean
+	updateUserStatus: (status: string) => void
+	status: string
+}
 
-
-
-
-
-
-
-export const ProfileInfo = (props: ProfilePropsType) => {
+export const ProfileInfo: FC<ProfileInfoPropsType> = ({profile, savePhoto, saveProfile, isOwner,updateUserStatus, status}) => {
 
 	const [editMode, setEditMode] = useState(false)
 
 	const styles = useStyles();
-	if (!props.profile) {
+
+	if (!profile) {
 		return <Preloader/>
 	}
 
-	const onMainPhotoSelected = (e: any) => {
-		if (e.target.files && e.target.files.length) {
-			const file = props.savePhoto(e.target.files[0])
+	const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.currentTarget.files && e.currentTarget.files.length) {
+			savePhoto(e.currentTarget.files[0])
 		}
 	};
-	const onSubmit = (formData: FormProfileDataType) => {
-		//saveProfile(formData)
+
+	const onSubmit = (formData: ProfileType) => {
+		saveProfile(formData).then()
 		setEditMode(false)
 	}
 
@@ -107,7 +109,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 							/>}>
 						<Avatar
 							alt="Travis Howard"
-							src={props.profile.photos.large || userPhoto}
+							src={profile.photos.large || userPhoto}
 							style={{width: '150px', height: '150px'}}/>
 					</Badge>
 				</Stack>
@@ -115,22 +117,22 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 
 			{editMode
 				?
-				<ProfileDataForm initialValues ={props.profile} /*profile={props.profile} onSubmit={props.onSubmit}*/ />
+				<ProfileDataFormContainer
+					initialValues={profile}
+					profile={profile}
+					onSubmit={onSubmit} />
 				:
 				<ProfileData
-					profile={props.profile}
-					savePhoto={props.savePhoto}
-					isOwner={props.isOwner}
-					updateUserStatus={props.updateUserStatus}
-					status={props.status}
+					profile={profile}
+					isOwner={isOwner}
 					goToEditMode={() => setEditMode(true)}/>}
 
-			<div className={styles.descriptionBlock}>
+		{/*	<div className={styles.descriptionBlock}>
 				<ProfileStatusWithHooks
 					status={props.status}
 					editMode={false}
 					updateUserStatus={props.updateUserStatus}/>
-			</div>
+			</div>*/}
 		</div>
 	)
 }
