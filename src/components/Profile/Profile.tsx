@@ -9,9 +9,9 @@ export type ProfilePropsType = {
 	status: string
 	updateUserStatus: (status: string) => void
 	isOwner: boolean
-	savePhoto: (file: PhotoPropsType) => void
+	savePhoto: (file: File) => void
 	goToEditMode?: () => void
-	saveProfile?:() => void
+	saveProfile: (profile: ProfileType) => Promise<{}>
 
 }
 

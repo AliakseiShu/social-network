@@ -43,8 +43,8 @@ type MapDispatchToPropsType = {
 	getUserProfile: (userId: string) => void
 	getUserStatus: (userId: string) => void
 	updateUserStatus: (status: string) => void
-	savePhoto: (file: PhotoPropsType) => void
-	saveProfile: () => void
+	savePhoto: (file: File) => void
+	saveProfile: (profile: ProfileType) => Promise<{}>
 }
 
 export type ProfileAPIContainerType = MapStateToPropsType & MapDispatchToPropsType
