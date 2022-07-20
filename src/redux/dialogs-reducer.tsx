@@ -2,7 +2,7 @@ const SEND_MESSAGE = 'SEND_MESSAGE';
 
 export type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
 
-type ActionDialogsTypes =
+export type ActionDialogsTypes =
     SendMessageCreatorType
 
 export type DialogItemType = {

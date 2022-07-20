@@ -1,7 +1,7 @@
 import {ContactsPropsType, PhotoPropsType, ProfileType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../components/api/api";
-import {AppStateType} from "./redux-store";
+import {AppStateType, AppThunk} from "./redux-store";
 import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'profile/ADD_POST';
@@ -17,7 +17,7 @@ export type SetUserStatusType = ReturnType<typeof setUserStatus>
 export type DeletePostType = ReturnType<typeof deletePost>
 export type SetPhotoType = ReturnType<typeof setUserPhotos>
 
-type ActionProfileTypes =
+export type ActionProfileTypes =
 	| AddPostActionType
 	| SetUserProfileType
 	| SetUserStatusType
@@ -121,14 +121,15 @@ export const savePhoto = (photoFile: string) => async (dispatch: Dispatch) => {
 		dispatch(setUserPhotos(response.data.data.photos))
 	}
 }
-export const saveProfile = (profile: ProfileType) => async (dispatch: Dispatch, getState: () => AppStateType) => {
-const	userId = getState().auth.userId
+export const saveProfile = (profile: ProfileType): AppThunk => async (dispatch: Dispatch, getState: () => AppStateType) => {
+	const userId = getState().auth.userId
+
 	let response = await profileAPI.saveProfile(profile)
 	if (response.data.resultCode === 0) {
-		//dispatch(getUserStatus(userId))
+		dispatch(getUserStatus(userId as number))
 	} else {
 		dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
-
+		return Promise.reject(response.data.messages[0])
 	}
 }
 export default ProfileReducer
