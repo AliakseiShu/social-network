@@ -7,18 +7,19 @@ import s from '../../common/FormsControls/FormsControls.module.css'
 export type FormProfileDataType = {
 	fullName: string
 	LookingForAJob: boolean
-	lookingForAJobDescription:string
-	aboutMe:string
+	lookingForAJobDescription: string
+	aboutMe: string
 }
-
 
 
 const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> = (props) => {
 	const styles = useStyles();
-		return (
+	return (
 		<form className={styles.descriptionBlock} onSubmit={props.handleSubmit}>
-			<div><button>save</button></div>
-			{props.error && <div className={s.formSummaryError}>{props.error}	</div>}
+			<div>
+				<button>save</button>
+			</div>
+			{props.error && <div className={s.formSummaryError}>{props.error}  </div>}
 			<div>
 				<b>Full name</b>: <Field placeholder={"Full name"}
 																 name={"fullName"}
@@ -40,7 +41,7 @@ const ProfileDataForm: React.FC<InjectedFormProps<FormProfileDataType>> = (props
 																name={"aboutMe"}
 																component={Textarea}/>
 			</div>
-		{/*	<div>
+			{/*	<div>
 				<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
 				// @ts-ignore
 				return <div key={key} className={styles.contact}>

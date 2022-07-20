@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
 import userPhoto from "../../../assets/imeges/user.png";
@@ -9,6 +9,67 @@ import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
 import {SmallAvatar, useStyles} from "./stylesProfile";
 import ProfileDataForm, {FormProfileDataType} from "./ProfileDataForm";
+import {ProfileType} from "../ProfileContainer";
+
+type ContactType = {
+	contactTitle: string
+	contactValue: string
+}
+
+export const Contact: FC<ContactType> = ({contactTitle, contactValue}) => {
+	const styles = useStyles();
+	return <div className={styles.contact}><b>{contactTitle}</b>: {contactValue}</div>
+}
+
+type ProfileDataType = {
+	profile: ProfileType
+	isOwner: boolean
+	goToEditMode: () => void
+}
+
+const ProfileData: FC<ProfileDataType> = ({profile,isOwner,goToEditMode}) => {
+
+	const styles = useStyles();
+
+	const contactsList = Object.keys(profile.contacts).map(key => {
+		const contactValue = profile.contacts[key as keyof ContactsType];
+		return <Contact key={key} contactTitle={key} contactValue={contactValue}/>;
+	});
+
+
+	return (
+		<div className={styles.descriptionBlock}>
+			{isOwner &&
+			<div>
+				<button onClick={goToEditMode}>edit</button>
+			</div>}
+			<div>
+				<b>Full name</b>: {profile.fullName}
+			</div>
+			<div>
+				<b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}
+			</div>
+			{profile.lookingForAJob &&
+			<div>
+				<b>My professional skills</b>: {profile.lookingForAJobDescription}
+			</div>
+			}
+			<div>
+				<b>About me</b>: {profile.aboutMe}
+			</div>
+			<div>
+				<b>Contacts</b>: {contactsList}
+			</div>
+		</div>
+	)
+}
+
+
+
+
+
+
+
 
 export const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -74,46 +135,8 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 	)
 }
 
-const ProfileData = (props: ProfilePropsType) => {
 
-	const styles = useStyles();
-	return (
-		<div className={styles.descriptionBlock}>
-			{props.isOwner &&
-			<div>
-				<button onClick={props.goToEditMode}>edit</button>
-			</div>}
-			<div>
-				<b>Full name</b>: {props.profile.fullName}
-			</div>
-			<div>
-				<b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}
-			</div>
-			{props.profile.lookingForAJob &&
-			<div>
-				<b>My professional skills</b>: {props.profile.lookingForAJobDescription}
-			</div>
-			}
-			<div>
-				<b>About me</b>: {props.profile.aboutMe}
-			</div>
-			<div>
-				<b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
-				// @ts-ignore
-				return <Contact	key={key}	contactTitle={key} contactValue={props.profile.contacts[key]}/>
-			})}
-			</div>
-		</div>
-	)
-}
 
-type ContactType = {
-	contactTitle: string
-	contactValue: string
-}
 
-export const Contact = (props: ContactType) => {
-	const styles = useStyles();
-	return <div className={styles.contact}><b>{props.contactTitle}</b>: {props.contactValue}</div>
-}
+
 
