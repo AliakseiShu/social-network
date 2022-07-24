@@ -19,7 +19,7 @@ let initialState = {
 	email: null,
 	isAuth: false,
 	logout: false,
-	captchaUrl: null
+	captchaUrl: null as string | null, // if null, then captcha is not required
 }
 
 export type InitialStateType = typeof initialState
@@ -27,9 +27,10 @@ export type InitialStateType = typeof initialState
 const authReducer = (state: InitialStateType = initialState, action: ActionAuthTypes): InitialStateType => {
 	switch (action.type) {
 		case SET_USER_DATA:
+		case GET_CAPTCHA_URL_SUCCESS:
 			return {
 				...state,
-				...action.payload,
+				...action.payload
 			}
 		default:
 			return state
@@ -49,12 +50,16 @@ export const getAuthUserData = (): AppThunk =>
 			dispatch(setAuthUserData(id, login, email, true))
 		}
 	}
-export const login = (email: string, password: string, rememberMe: boolean) =>
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) =>
 	async (dispatch: ThunkDispatch<AppStateType, unknown, ActionAuthTypes | FormAction>) => {
-		let response = await authAPI.login(email, password, rememberMe)
+		let response = await authAPI.login(email, password, rememberMe, captcha)
 		if (response.data.resultCode === 0) {
+
 			dispatch(getAuthUserData())
 		} else {
+			if (response.data.resultCode === 10) {
+				dispatch(getCaptchaUrl())
+			}
 			let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
 			dispatch(stopSubmit('login', {_error: message}))
 		}
