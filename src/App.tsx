@@ -28,11 +28,11 @@ type MapDispatchToProps = {
 export type AppPropsType = MapStateToPropsType & MapDispatchToProps
 
 class App extends React.Component <AppPropsType> {
+
 	catchALlUnhandledErrors = (e: PromiseRejectionEvent) => {
 		console.log(e)
-		alert('Some error occured')
-		//console.error(promiseRejectionEvent)
-
+		/*const errorMessage = e.reason.message + ": " + e.reason.response.statusText;
+		this.props.setAppError(errorMessage)*/
 	}
 
 	componentDidMount() {
