@@ -28,8 +28,20 @@ type MapDispatchToProps = {
 export type AppPropsType = MapStateToPropsType & MapDispatchToProps
 
 class App extends React.Component <AppPropsType> {
+	catchALlUnhandledErrors = (e: PromiseRejectionEvent) => {
+		console.log(e)
+		alert('Some error occured')
+		//console.error(promiseRejectionEvent)
+
+	}
+
 	componentDidMount() {
 		this.props.initializeApp()
+		window.addEventListener("unhandledrejection", this.catchALlUnhandledErrors)
+	};
+
+	componentWillMount() {
+		window.removeEventListener("unhandledrejection", this.catchALlUnhandledErrors)
 	}
 
 	render() {
@@ -42,7 +54,7 @@ class App extends React.Component <AppPropsType> {
 				<Navbar/>
 				<div className='app-wrapper-content'>
 					<Switch>
-						<Route exact path='/' component={()=> <Redirect to={'/profile'}/>}/>
+						<Route exact path='/' component={() => <Redirect to={'/profile'}/>}/>
 						<Route path='/profile/:userId?' component={() => {
 							return <React.Suspense fallback={<Preloader/>}>
 								<ProfileContainer/>
