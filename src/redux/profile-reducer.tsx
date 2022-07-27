@@ -2,8 +2,8 @@ import {PhotoPropsType, ProfileType} from "../components/Profile/ProfileContaine
 import {profileAPI, usersAPI} from "../components/api/api";
 import {AppStateType, AppThunk} from "./redux-store";
 import {stopSubmit} from "redux-form";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+
+
 
 const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFiILE = 'profile/SET_USER_PROFiILE';
@@ -113,11 +113,11 @@ export const getUserStatus = (userId: number): AppThunk => async (dispatch) => {
 export const updateUserStatus = (status: string): AppThunk => async (dispatch) => {
 	try {
 
-	let response = await profileAPI.updateStatus(status)
-	if (response.data.resultCode === 0) {
-		dispatch(setUserStatus(status))
-	}
-} catch(error){
+		let response = await profileAPI.updateStatus(status)
+		if (response.data.resultCode === 0) {
+			dispatch(setUserStatus(status))
+		}
+	} catch (error) {
 		//
 	}
 }
