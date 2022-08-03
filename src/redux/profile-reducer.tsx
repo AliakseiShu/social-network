@@ -100,7 +100,6 @@ export const deletePost = (postId: number) =>
 export const setUserPhotos = (photos: PhotoPropsType) =>
 	({type: SET_USER_PHOTO, photos} as const)
 
-
 //thunks
 export const getUserProfile = (userId: number): AppThunk => async (dispatch) => {
 	let response = await usersAPI.getProfile(userId)
@@ -118,7 +117,6 @@ export const updateUserStatus = (status: string): AppThunk => async (dispatch) =
 			dispatch(setUserStatus(status))
 		}
 	} catch (error) {
-		//
 	}
 }
 export const savePhoto = (photoFile: File): AppThunk => async (dispatch) => {
