@@ -10,6 +10,7 @@ export type DialogItemType = {
     name: string
     newMessageBody: string
 }
+
 export type MessageType = {
     id: number
     message: string
@@ -27,7 +28,6 @@ let initialState = {
         {id: 2, message: "How are You?"},
         {id: 3, message: "ok"},
     ] as MessageType[],
-
 }
 
 export type InitialStateType = typeof initialState
