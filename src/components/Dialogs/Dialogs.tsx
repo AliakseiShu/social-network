@@ -35,21 +35,4 @@ export const Dialogs = (props: PropsType) => {
     )
 }
 
-/*
-type FormDataType = {
-    message: string
-}
 
-const AddMassageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component="textarea" name="newMessagesBody" placeholder="Enter your message"/>
-            </div>
-            <div>
-                <button>Send</button>
-            </div>
-        </form>
-    )
-}
-const AddMassageFormRedux = reduxForm<FormDataType>({form: 'dialogAddMassageForm'})(AddMassageForm)*/
