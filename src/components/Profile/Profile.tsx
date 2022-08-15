@@ -11,7 +11,6 @@ export type ProfilePropsType = {
 	savePhoto: (file: File) => void
 	goToEditMode?: () => void
 	saveProfile: (profile: ProfileType) => Promise<{}>
-
 }
 
 export const Profile = (props: ProfilePropsType) => {
