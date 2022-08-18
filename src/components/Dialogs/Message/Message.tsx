@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import s from './../Dialogs.module.css';
 
-
 type MessageType = {
   message: string
 }

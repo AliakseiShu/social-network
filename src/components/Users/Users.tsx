@@ -13,7 +13,6 @@ type UsersNewPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     followingInProgress: Array<number>
-
 }
 
 export let Users = (props: UsersNewPropsType) => {
