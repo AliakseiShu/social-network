@@ -133,7 +133,6 @@ export const saveProfile = (profile: ProfileType): AppThunk => async (dispatch, 
 		dispatch(getUserProfile(userId as any))
 	} else {
 		dispatch(stopSubmit('edit-profile', {_error: response.messages[0]}))
-		//return Promise.reject(response.messages[0])
 	}
 }
 export default ProfileReducer
